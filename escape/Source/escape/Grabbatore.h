@@ -3,45 +3,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/TriggerVolume.h"
 #include "Components/ActorComponent.h"
-
-#include "PortaDio.generated.h"
+#include "Grabbatore.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class ESCAPE_API UPortaDio : public UActorComponent
+class ESCAPE_API UGrabbatore : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UPortaDio();
+	UGrabbatore();
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	void ApriPorta();
-	void ChiudiPorta();
-
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-private:
 		
-	UPROPERTY(VisibleAnywhere)
-		float OpenAngle = 90.0f;
-
-	UPROPERTY(EditAnywhere)
-		ATriggerVolume* LastraPressure;
-
-		AActor* WhoTriggerPlate;
-
-		UPROPERTY(EditAnywhere)
-			float TempoPortaAperta = 1.f;
-
-		float MomentoAperturaPorta;
 	
 };

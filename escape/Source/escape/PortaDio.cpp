@@ -33,6 +33,13 @@ void UPortaDio::ApriPorta()
 	Owner->SetActorRotation(newRotation);
 }
 
+void UPortaDio::ChiudiPorta()
+{
+	AActor* Owner = GetOwner();
+
+	Owner->SetActorRotation(FRotator(0.0f, 179.999756f, 0.0f));
+}
+
 
 // Called every frame
 void UPortaDio::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -42,6 +49,12 @@ void UPortaDio::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	if (LastraPressure->IsOverlappingActor(WhoTriggerPlate)) {
 
 		ApriPorta();
+		MomentoAperturaPorta = GetWorld()->GetTimeSeconds();
 	}
+
+	if(GetWorld()->GetTimeSeconds() - MomentoAperturaPorta > TempoPortaAperta){
+		ChiudiPorta();
+	}
+
 }
 
