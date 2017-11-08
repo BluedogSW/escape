@@ -3,6 +3,8 @@
 #include "Grabbatore.h"
 
 
+#define OUTPUT
+
 // Sets default values for this component's properties
 UGrabbatore::UGrabbatore()
 {
@@ -29,6 +31,18 @@ void UGrabbatore::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	FVector PlayerViewPortPosition;
+	FRotator PlayerViewPortRotator;
+
+	//definendo il MACRO OUT con #define, il metodo GetPlayerViewport è void ma get, funziona quindi così:
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
+	
+		OUT PlayerViewPortPosition,
+		OUT PlayerViewPortRotator
+	
+	);
+	// Log per aggiornare in ticking la position e rotation del Punto Vista del Giocatore.
+	UE_LOG(LogTemp, Warning, TEXT("Posizione: %s Rotazione: %s"),  *PlayerViewPortPosition.ToString(), *PlayerViewPortRotator.ToString());
+
 }
 
