@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Grabbatore.h"
+#include "Runtime/Engine/Public/DrawDebugHelpers.h"
 
 
 #define OUTPUT
@@ -42,7 +43,20 @@ void UGrabbatore::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	
 	);
 	// Log per aggiornare in ticking la position e rotation del Punto Vista del Giocatore.
-	UE_LOG(LogTemp, Warning, TEXT("Posizione: %s Rotazione: %s"),  *PlayerViewPortPosition.ToString(), *PlayerViewPortRotator.ToString());
+	/*UE_LOG(LogTemp, Warning, TEXT("Posizione: %s Rotazione: %s"),  *PlayerViewPortPosition.ToString(), *PlayerViewPortRotator.ToString());*/
+
+	
+	FVector LineTraceEnd = PlayerViewPortPosition + PlayerViewPortRotator.Vector() * Reach;
+
+	DrawDebugLine(
+		GetWorld(), 
+		PlayerViewPortPosition, 
+		LineTraceEnd,
+		ColorLineDD,
+		false, 
+		0.f, 
+		0.f,
+		5.0);
 
 }
 
